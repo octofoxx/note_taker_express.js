@@ -6,11 +6,14 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
+//standard middleware for using express (parsing JSON and url encoded data)
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/api', api);
-app.use('/html', pages);
+
+//calls the set up functions in routes folder for use with express
+api(app);
+pages(app);
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
